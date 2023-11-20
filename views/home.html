@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.css" />
+  </head>
+  <body>
+    {{ template "navbar" }}
+
+    <div class="container-fluid">
+      <div class="row mt-4">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
+          <!-- Criar post -->
+          <h3>New Post</h3>
+          <fieldset>
+            <form id="new_post">
+              <div class="form-group">
+                <label for="title">Títle</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="title"
+                  id="title"
+                  required="required"
+                  placeholder="What's the title of your post?"
+                />
+              </div>
+              <div class="form-group">
+                <label for="content">Content</label>
+                <textarea
+                  class="form-control"
+                  id="content"
+                  name="content"
+                  required="required"
+                  placeholder="Enter the content of your post"
+                ></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit">Post</button>
+            </form>
+          </fieldset>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
+          <h6>{{ .UserID }}</h6>
+          {{ range .Posts }} {{ if (eq .AuthorID $.UserID) }} {{ template
+          "authorized-posts" . }} {{ template "all-posts" .}} {{ end }} {{ end
+          }}
+        </div>
+      </div>
+    </div>
+    {{ template "footer" }} {{ template "scripts" }}
+    <script src="/assets/js/posts.js"></script>
+  </body>
+</html>

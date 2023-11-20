@@ -1,0 +1,25 @@
+<div class="jumbotron">
+  {{ if (eq .AuthorID $.UserID) }}
+  <p>Like | Edit | Delete</p>
+
+  {{ else }}
+
+  <p>Like</p>
+  {{ end }}
+</div>
+
+{{ define "header-post" }}
+<h1 class="display-4">{{ .Title }}</h1>
+<p class="lead">{{ .Content }}</p>
+<a href="#">{{ .AuthorNick }} - {{ .CreatedAt }}</a>
+<hr class="my-4" />
+
+{{ end }} {{ define "authorized-posts" }}
+<div class="jumbotron" data-post-id="{{ .ID }}">
+  {{ template "header-post" . }}
+</div>
+{{ end }} {{ define "all-posts" }}
+<div class="jumbotron" data-post-id="{{ .ID }}">
+  {{ template "header-post" . }}
+</div>
+{{ end }}
