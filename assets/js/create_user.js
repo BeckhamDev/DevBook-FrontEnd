@@ -4,7 +4,7 @@ function createUser(event) {
   event.preventDefault();
 
   if ($("#password").val() != $("#confirm_password").val()) {
-    alert("The passwords must match!");
+    Swal.fire("We have a problem", "The passwords do not match", "error")
     return;
   }
 
@@ -19,9 +19,23 @@ function createUser(event) {
     },
   })
     .done(function () {
-      alert("User created successfuly!");
+      Swal.fire("All Done!", "User created successfuly", "success")
+        .then(function(){
+          $.ajax({
+            url:"/login",
+            method:"POST",
+            data:{
+              email: $("#email").val(),
+              password: $("password").val(),
+            }
+          }).done(function () {
+            window.location = "/home"
+          }).fail(function () {
+            Swal.fire("Error", "Error authenticating the user", "error")
+          });
+        })
     })
     .fail(function () {
-      alert("Error creating user!");
+      Swal.fire("Error", "Error creating the user", "error")
     });
 }

@@ -15,6 +15,6 @@ function login(event) {
       window.location = "/home";
     })
     .fail(function () {
-      alert("Error validating user's credentials!");
+      Swal.fire("Error", "Error validating user's credentials!", "error")
     });
 }
