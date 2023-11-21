@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devbook - Edit Post - {{ .Title }}</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.css" />
+</head>
+<body>
+    {{template "navbar"}}
+    <div class="container-fluid">
+        <div class="row mt-4">
+            <div class="col-12">
+                <h3>Edit Post</h3>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Insert your new title here..." value="{{ .Title }}">
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea class="form-control" name="content" id="content" placeholder="Insert your post content" >{{ .Content }}</textarea>
+                </div>
+
+                <button id="update_post" class="btn btn-info" data-post-id="{{ .ID }}">Save Changes</button>
+            </div>
+        </div>
+    </div>
+    {{ template "footer" }}
+    {{ template "scripts" }}
+    <script src="/assets/js/posts.js"></script>
+</body>
+</html>

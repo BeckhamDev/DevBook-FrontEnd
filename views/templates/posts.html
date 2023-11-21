@@ -1,25 +1,42 @@
-<div class="jumbotron">
-  {{ if (eq .AuthorID $.UserID) }}
-  <p>Like | Edit | Delete</p>
+{{ define "likes" }}
+  <i class="fa-solid fa-heart like-post"></i>
+  <span> {{ .Likes }} </span>
+{{ end }}
 
-  {{ else }}
+{{ define "edit" }}
+  <a href="/posts/{{ .ID }}/edit" style="text-decoration: none;">
+    <i class="fa-solid fa-pen-to-square"></i>
+  </a>
+{{ end }}
 
-  <p>Like</p>
-  {{ end }}
-</div>
+{{ define "delete" }}
+  <a href="/posts/{{ .ID }}/delete" style="text-decoration: none;">
+    <i class="fa-solid fa-trash text-danger"></i>
+  </a>
+{{ end }}
+
 
 {{ define "header-post" }}
-<h1 class="display-4">{{ .Title }}</h1>
-<p class="lead">{{ .Content }}</p>
-<a href="#">{{ .AuthorNick }} - {{ .CreatedAt }}</a>
-<hr class="my-4" />
+  <h1 class="display-4">{{ .Title }}</h1>
+  <p class="lead">{{ .Content }}</p>
+  <a href="#">{{ .AuthorNick }} - {{ .CreatedAt.Format "02/01/2006" }}</a>
+  <hr class="my-4" />
+{{ end }} 
 
-{{ end }} {{ define "authorized-posts" }}
-<div class="jumbotron" data-post-id="{{ .ID }}">
-  {{ template "header-post" . }}
-</div>
-{{ end }} {{ define "all-posts" }}
-<div class="jumbotron" data-post-id="{{ .ID }}">
-  {{ template "header-post" . }}
-</div>
+{{ define "authorized-posts" }}
+  <div class="jumbotron" data-post-id="{{ .ID }}">
+    {{ template "header-post" . }}
+    <p>
+      {{ template "likes" . }}
+      {{ template "edit" . }}
+      {{ template "delete" . }}
+    </p>
+  </div>
+{{ end }} 
+
+{{ define "all-posts" }}
+  <div class="jumbotron" data-post-id="{{ .ID }}">
+    {{ template "header-post" . }}
+    <p> {{ template "likes" . }}</p>
+  </div>
 {{ end }}

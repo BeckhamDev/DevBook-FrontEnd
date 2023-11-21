@@ -42,10 +42,13 @@
           </fieldset>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
-          <h6>{{ .UserID }}</h6>
-          {{ range .Posts }} {{ if (eq .AuthorID $.UserID) }} {{ template
-          "authorized-posts" . }} {{ template "all-posts" .}} {{ end }} {{ end
-          }}
+          {{ range .Posts }} 
+            {{ if (eq .AuthorID $.UserID) }}
+              {{ template "authorized-posts" . }} 
+            {{ else }}
+              {{ template "all-posts" .}} 
+            {{ end }}
+          {{ end }}
         </div>
       </div>
     </div>
