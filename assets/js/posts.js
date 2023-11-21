@@ -1,7 +1,9 @@
 $("#new_post").on("submit", newPost);
 $("#update_post").on("click", updatePost);
+$(".delete-post").on("click", deletePost);
 $(document).on("click", '.like-post', likePost);
 $(document).on("click", '.unlike-post', unlikePost);
+
 
 function newPost(event) {
   event.preventDefault();
@@ -94,5 +96,26 @@ function updatePost(event) {
     alert("Deu merda")
   }).always(function(){
     $('#update_post').prop('disabled', false)
+  })
+}
+
+function deletePost(event) {
+  event.preventDefault();
+
+  const targetElement = $(event.target);
+  const post =targetElement.closest("div")
+  const postId = post.data("post-id")
+
+  targetElement.prop('disabled', true);
+
+  $.ajax({
+    url: `/posts/${postId}`,
+    method: "DELETE"
+  }).done(function(){
+    post.fadeOut("slow", function(){
+      $(this).remove()
+    })
+  }).fail(function(){
+    alert("Error deleting the post!")
   })
 }

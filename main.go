@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	defer fmt.Println("Rodando Web Application")
+	fmt.Println("Rodando Web Application")
 	config.Load()
 	cookies.Config()
 	utils.LoadTemplates()
