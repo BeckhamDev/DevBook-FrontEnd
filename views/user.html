@@ -26,8 +26,12 @@
                             {{ .User.Name }} - {{ .User.Nick }} - Since {{ .User.CreatedAt.Format "02/01/2006"}}
                         </h6>
                         <p class="card-text">
-                            <a href="#">
+                            <a href="#" data-togle="modal" data-target="#modal-followers">
                                 Followers: {{ len .User.Followers}}
+                            </a>
+                        </p>
+                        <p class="card-text">
+                            <a href="#" data-togle="modal" data-target="#modal-following">
                                 Following: {{ len .User.Following}}
                             </a>
                         </p>
@@ -65,6 +69,7 @@
             </div>
         </div>
     </div>
+    {{ template "modal-followers" .User }}
     {{ template "footer" }}
     {{ template "scripts" }}
     <script src="/assets/js/posts.js"></script>
