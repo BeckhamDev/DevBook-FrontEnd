@@ -10,9 +10,9 @@
     {{  template "navbar"   }}
 
     {{ $AlreadyFollowed := false }}
-    {{ range .User.Followers}}
-        {{ if (eq .ID $.UserLogged)}}
-            {{ $AlreadyFollowed := true }}
+    {{ range .User.Followers }}
+        {{ if (eq .ID $.UserLogged) }}
+            {{ $AlreadyFollowed = true }}
         {{ end }}
     {{ end }}
 
@@ -68,4 +68,5 @@
     {{ template "footer" }}
     {{ template "scripts" }}
     <script src="/assets/js/posts.js"></script>
+    <script src="/assets/js/user.js"></script>
 </body>

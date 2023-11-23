@@ -136,6 +136,7 @@ func LoadUserProfile(w http.ResponseWriter, r *http.Request){
 
 	cookie, _ := cookies.ReadCookies(r)
 	userLogged, _ := strconv.ParseUint(cookie["id"], 10, 64) 
+	fmt.Println(userLogged)
 
 	utils.ExecTemplate(w, "user.html", struct {
 		User models.User
